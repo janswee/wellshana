@@ -1,0 +1,250 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"> <!-- left nav bar -->
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Frontend</li>
+                    <li class="active"><a href="#">Volunteer</a></li>
+                    <li><a href="#">Donate</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Browse<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Charities/Causes</a></li>
+                          <li><a href="#">People</a></li>
+                          <li><a href="#">Groups</a></li>
+                          <li><a href="#">Vignettes</a></li>
+                        </ul>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">How to be an upstart</a></li>
+                    <li><a href="#">How to start a group</a></li>
+               </ul>
+           </div><!--/.well -->
+        </div><!--/span-->
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb">
+                        <li>
+                            <a href="#">Home</a> <span class="divider">><a href="#"> My Profile</a><span class="divider"></span>
+
+                        </li>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="profile-thumb-container">
+                        <img src="images/Meg_Profile.jpg">
+                        <a class="btn btn-large btn-primary" href="#/session">Activate Session</a>
+                        <a class="btn btn-large btn-primary" href="#/chat">Activate Chat</a>
+                    </span>
+                    <span class="profile">
+                            <div><h4 id="profile-name">{{therapist.user.name.firstName}} {{therapist.user.name.lastName}}</h4></div>
+                            <div>Lives in New York, NY</div>
+                            <div>Born on May 7th</div>
+                    </span>
+                </div><!--/span-->
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="accordion-group" id="bio-accordian">
+                        <span class="accordion-heading">
+                            <h3>Bios (<a class="accordian-toggle" id="bio-collapse" data-toggle="collapse" data-parent="#bio-accordian" data-target="#bio-summary"><span class="glyphicon glyphicon-minus-sign"></span></a><span class="collapse-expand-text"> Collapse)</span></h3>
+                        </span>
+                    </div>
+                    <div id="bio-summary" class="accordion-body collapse in">
+                        <p><h4 class="blue">Summary</h4></p>
+                        <p>Dedicated non-profit professional possessing a record of performance in leading efforts to identify, solicit, and secure individual, major and corporate gifts through development and cultivation of key relationships supporting organizational mission and vision.</p>
+                        <p><h4 class="blue">Specialities</h4></p>
+                        <p>Fund Generation & Process Implementation, Program Facilitation, Project Management, Strategic Marketing, Event Execution, Revenue Generation, Donor Relations, Volunteer Management, and Compliance to drive key goals.</p>
+                    </div>
+                 </div>
+            </div> <!--end bio accordian-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="accordion-group" id="charities-accordian">
+                        <span class="accordion-heading">
+                            <h3>Currently Following (
+                                <a class="accordian-toggle" id="charities-collapse" data-toggle="collapse" data-parent="#charities-accordian" data-target="#charities-list"><span class="glyphicon glyphicon-minus-sign"></span></a>
+                                <span class="collapse-expand-text"> Collapse)</span>
+                            </h3>
+                        </span>
+                    </div>
+                    <div id="charities-list" class="accordion-body collapse in">
+                        <p><h4 class="blue">Charities (3)</h4></p>
+                        <div class="row row-separator">
+                            <div class="col-md-9">
+                                <div><a href="charity.html?name=doefund" class="charity">The Doe Fund</a> (Poverty; Education)
+                                </div>
+                                <div>
+                                    <strong>Why I Care:</strong> Helps to provide rehabilitation, employment, and hope to thousands of minority men in the NYC and Philly.
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="charity-logo-container" href="charity.html?name=doefund">
+                                    <img src="images/DoeFund.jpg">
+                                </a>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div><a href="charity.html?name=donorschoose" class="charity">DonorsChoose.org</a> (Education)
+                                </div>
+                                <div>
+                                    <strong>Why I Care:</strong> Helps teachers fund school projects in impoverished neighborhoods and allows those kids to get better access to educational tools.
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="charity-logo-container" href="charity.html?name=donorschoose">
+                                    <img src="images/DonorsChoose.jpg">
+                                </a>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div><a href="charity.html?name=redcross" class="charity">American Red Cross</a> (Human Services)
+                                </div>
+                                <div>
+                                    <strong>Why I Care:</strong> Provides large scale humanitarian services in response to disasters.
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="charity-logo-container" href="charity.html?name=redcross">
+                                    <img class="thumbnail" src="images/RedCross.jpg">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </div> <!--end charities accordian-->
+            <br>
+            <div class="row-fluid">
+              <div class="col-md-12">
+                <div id='calendar'></div>
+              </div>
+            </div>
+        </div><!--/span-->
+    </div><!--/row-->
+
+    <footer class="footer"><p>All rights reserved.</p></footer>
+</div>
+
+<script src='javascripts/moment.min.js'></script>
+<script src='javascripts/fullcalendar.js'></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+      //calendar
+      $('#calendar').fullCalendar({
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
+        defaultDate: '2015-02-12',
+        selectable: true,
+        selectHelper: true,
+        select: function(start, end) {
+          var title = prompt('Event Title:');
+          var eventData;
+          if (title) {
+            eventData = {
+              title: title,
+              start: start,
+              end: end
+            };
+            $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+          }
+          $('#calendar').fullCalendar('unselect');
+        },
+        editable: true,
+        eventLimit: true, // allow "more" link when too many events
+        events: [
+            {
+              title: 'All Day Event',
+              start: '2015-02-01',
+              id: 1,
+              url: './event/1'
+            },
+            {
+              title: 'Long Event',
+              start: '2015-02-07',
+              end: '2015-02-10',
+              id: 2,
+              url: './event/2'
+            },
+            {
+              id: 999,
+              title: 'Repeating Event',
+              start: '2015-02-09T16:00:00'
+            },
+            {
+              id: 999,
+              title: 'Repeating Event',
+              start: '2015-02-16T16:00:00'
+            },
+            {
+              title: 'Conference',
+              start: '2015-02-11',
+              end: '2015-02-13',
+              id: 3,
+              url: 'event/3'
+            },
+            {
+              title: 'Meeting',
+              start: '2015-02-12T10:30:00',
+              end: '2015-02-12T12:30:00',
+              id: 4,
+              url: 'event/4'
+            },
+            {
+              title: 'Lunch',
+              start: '2015-02-12T12:00:00',
+              id: 5,
+              url: 'event/5'                       },
+            {
+              title: 'Meeting',
+              start: '2015-02-12T14:30:00'
+            },
+            {
+              title: 'Happy Hour',
+              start: '2015-02-12T17:30:00'
+            },
+            {
+              title: 'Dinner',
+              start: '2015-02-12T20:00:00'
+            },
+            {
+              title: 'Birthday Party',
+              start: '2015-02-13T07:00:00'
+            },
+            {
+              title: 'Click for Google',
+              url: 'http://google.com/',
+              start: '2015-02-28'
+            }
+          ]
+      });
+
+      $('.accordian-toggle').on("click", function(e) {
+              varClass = $(this).find('span').toggleClass('glyphicon-minus-sign glyphicon-plus-sign').attr('class');
+
+              collapseExpandText = $(this).parent().find('.collapse-expand-text'); //parent is 'h3' with 2 children 'a' and 'span'
+
+              if (collapseExpandText.html() == "<span class=\"collapse-expand-text\"> Expand)</span>") {
+                  collapseExpandText.html("<span class=\"collapse-expand-text\"> Collapse)</span>");
+              } else {
+                  collapseExpandText.html("<span class=\"collapse-expand-text\"> Expand)</span>");
+              }
+
+      });
+    });
+
+
+</script>

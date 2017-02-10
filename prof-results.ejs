@@ -1,0 +1,66 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9">
+          <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                  <h2>Therapist Results</h2>
+                </div><!--/span-->
+            </div>
+            <h3 ng-show="!therapists.length">No search results returned</h3>
+            <div ng-repeat="therapist in therapists" class="row">
+              <div id="prof-image" class="col-md-1" style="width: 100px;" >
+                <span>
+                  <img class="profile-image" ng-src="{{therapist.getDefaultImage().imagePath}}{{therapist.getDefaultImage().imageName}}">
+                </span>
+              </div>
+              <div id="prof-summary" class="col-md-7">
+                  <div id="prof-header">
+                    <!--<a href="#prof-detail/{{therapist._id}}" class="charity">-->
+                    <a ui-sref="prof-detail({id: '{{therapist.user._id}}' })" class="charity">
+                      <h4 id="profile-name"> {{therapist.user.name.firstName}} {{therapist.user.name.lastName}}</h4></a>
+                    {{therapist.professionalTitle}}
+                  </div>
+                  <div id="prof-description" style="width: 100%; overflow: hidden; text-overflow: ellipsis;">
+                      <strong>About:</strong> {{therapist.profilePage.about}}
+                  </div>
+                  <div ng-show="{{isApptSearch}}" class="row">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <br>
+                        <uib-carousel disable-animation="true" template-url="views/templates/carousel-buttons.html" active="availSlots[therapist._id].length/2" interval=-1 no-wrap=true>
+                          <uib-slide ng-repeat="availSlot in availSlots[therapist._id] | orderBy:availSlot.startDateTime">
+                            <a ng-show="{{($index-2) >= 0}}" class="btn btn-sm btn-primary" ng-click="onSelectAppt(availSlots[therapist._id][$index-2].startDateTime, null, availSlots[therapist._id][$index-2].slotDurationMinutes,'appt.book', { therapist: therapist } )">{{availSlots[therapist._id][$index-2].startDateTime.format('M/D hh:mm a')}}</a>&nbsp;
+                            <a ng-show="{{($index-1) >= 0}}" class="btn btn-sm btn-primary" ng-click="onSelectAppt(availSlots[therapist._id][$index-1].startDateTime, null, availSlots[therapist._id][$index-1].slotDurationMinutes,'appt.book', { therapist: therapist } )">{{availSlots[therapist._id][$index-1].startDateTime.format('M/D hh:mm a')}}</a>&nbsp;
+                            <a class="btn btn-sm btn-primary" ng-click="onSelectAppt(availSlot.startDateTime, null, availSlot.slotDurationMinutes,'appt.book', { therapist: therapist } )">{{availSlot.startDateTime.format('M/D hh:mm a')}}</a>&nbsp;
+                            <a ng-show="{{($index+1) < (availSlots[therapist._id].length)}}" class="btn btn-sm btn-primary" ng-click="onSelectAppt(availSlots[therapist._id][$index+1].startDateTime, null, availSlots[therapist._id][$index+1].slotDurationMinutes,'appt.book', { therapist: therapist } )">{{availSlots[therapist._id][$index+1].startDateTime.format('M/D hh:mm a')}}</a>&nbsp;
+                            <a ng-show="{{($index+2) < (availSlots[therapist._id].length)}}" class="btn btn-sm btn-primary" ng-click="onSelectAppt(availSlots[therapist._id][$index+2].startDateTime, null, availSlots[therapist._id][$index+2].slotDurationMinutes,'appt.book', { therapist: therapist } )">{{availSlots[therapist._id][$index+2].startDateTime.format('M/D hh:mm a')}}</a>&nbsp;
+                          </uib-slide>
+                        </uib-carousel>
+                      </div><!-- end of col -->
+                    </div><!-- end of row -->
+                  </div>
+              </div>
+              <div id="prof-contact-details" class="col-md-3">
+                  <div id="prof-phone"><strong>({{therapist.user.phone.areacode}}) {{therapist.user.phone.number}}</strong>
+                  </div>
+                  <div id="prof-city-state-zip">
+                      {{therapist.user.address.city}}, {{therapist.user.address.state}} {{therapist.user.address.zip}}
+                  </div>
+              </div>
+            </div><!-- end of row-->
+        </div><!-- end of container -->
+      </div><!-- end of col -->
+    </div><!--/row-->
+    <div ng-repeat='availSlot in availSlots'>availSlots is {{availSlots}}</div>
+    <div>Appointment is {{appointment}}. appointment.apptDate is {{appointment.apptDate | date: 'yyyy-MMM-dd hh:mm:ssa' }}. Desired date is {{apptModel.desiredDate | date: 'yyyy-MMM-dd'}}. Desired time is {{apptModel.desiredTime}}</div>
+    <pre>
+      <!-- Here's some values to keep an eye on in the sample in order to understand $state and $stateParams -->
+      $state = {{$state.current.name}}
+      $stateParams = {{$stateParams}}
+      $state full url = {{ $state.$current.url.source }}
+      <!-- $state.$current is not a public api, we are using it to
+           display the full url for learning purposes-->
+    </pre>
+    <footer class="footer"><p>All rights reserved.</p></footer>
+</div>

@@ -1,0 +1,17 @@
+
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-2"> <!-- left nav bar -->
+            <ul class="nav nav-pills nav-stacked">
+                    <li ui-sref-active="active" ><a ui-sref="main.home">Home</a></li>
+                    <li ui-sref-active="active" ><a ui-sref="main.getting-started">Getting Started</a></li>
+                    <li ui-sref-active="active" ><a ui-sref="account.schedule">Tips</a></li>
+                    <li ui-sref-active="active" ><a ui-sref="account.schedule">Read Testimonials</a></li>
+                    <li ui-sref-active="active" ><a ui-sref="account.notifications">Resources</a></li>
+           </ul>
+          </div>
+          <div class="col-md-10">
+              <div ui-view="body" />
+          </div><!--/span-->
+      </div><!--/row-->
+  </div>

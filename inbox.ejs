@@ -1,0 +1,81 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+          <h3><a ui-sref="inbox" ui-sref-opts="{reload: true}">Inbox</a></h3>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+              <button class="btn btn-primary fa fa-lg fa-pencil-square-o" ui-sref="inbox.compose-message"></button>
+              &nbsp;
+              <button class="btn btn-primary fa fa-lg fa-trash-o" ng-click=""></button>
+              <select class="input-sm pull-right" id="messageInputTypeOptions" ng-model="messageInputTypeOptions" style="width: 200px">
+                <option value="0" ng-selected=true>-- Select All --</option>
+                <option value="1">Unread</option>
+                <option value="2">Starred</option>
+                <option value="3">All</option>
+              </select>
+            </div>
+          </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div ng-show="messages.length === 0">You have no messages at this time</div>
+      <br>
+      <div class="tile" ng-class="{selected: messageId === message._id}" ng-repeat="message in messages | filter:messageInputTypeOptions">
+        <div class="row" style="padding: 5px;">
+          <div class="col-md-4">
+              <a ui-sref="prof-detail({id: '{{message.toUserId}}' })">
+                  <img class="img-circle" width="75" ng-src="{{message.toUserProfImage.imagePath}}{{message.toUserProfImage.imageName}}">
+              </a>
+          </div>
+          <div class="col-md-6" ui-sref="inbox.message({ messageId: message._id })" >
+              <label style="font-size: 14px;">{{message.replies[message.replies.length-1].fromUser.name.firstName}} {{message.replies[message.replies.length-1].fromUser.name.lastName}}</label>
+              <label>{{message.lastUpdate | date: 'MMMM dd, yyyy' }}</label>
+          </div>
+          <div class="col-md-2" ui-sref="inbox.message({ messageId: message._id })" >
+              <label>{{message.readStatusString}}</label>
+              <div ng-class="message.starClass" ng-model="message.starred" ng-click="toggleStar(message)" />
+          </div>
+        </div><!--end of row-->
+        <div class="row" style="padding: 5px;" ui-sref="inbox.message({ messageId: message._id })" >
+          <div class="col-md-12">
+              <label style="font-size:14px; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                {{message.subject}}
+              </label>
+              <span style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                {{message.replies[message.replies.length-1].body2 | limitTo: 50 }}
+              </span>
+              <span ng-if="message.replies[message.replies.length-1].body.length > 50">...</span>
+          </div><!-- end of col -->
+        </div><!--end of row-->
+      </div><!-- end of class="tile" -->
+    </div><!-- end of col-4 -->
+    <div class="col-md-8">
+      <div ui-view="inbox-main">
+        <div ng-repeat="reply in messages[0].replies" class="row">
+          <div ng-hide="{{reply.fromUser.userId === fromUser.id}}" class="col-md-2">
+              <img class="img-circle pull-right" width="75"ng-src="{{messages[0].toUserProfImage.imagePath}}{{messages[0].toUserProfImage.imageName}}">
+              <label class="pull-right">{{reply.fromUser.name.firstName}} {{reply.fromUser.name.lastName}}</label>
+          </div>
+          <div class="col-md-7">
+            <div class="panel panel-default">
+              <span class="message-timestamp">{{reply.sentDate | date: 'MMMM dd'}}</span>
+              <div class="panel-body">
+                <div ng-bind-html="reply.body"></div>
+              </div>
+                  <span class="message-timestamp">{{reply.sentDate | date: 'hh:mm a'}}</span>
+            </div>
+          </div>
+          <div ng-show="{{reply.fromUser.userId === fromUser.id}}" class="col-md-2">
+            <a ui-sref="prof-detail({id: '{{reply.fromName}}' })">
+                <img class="img-circle" width="75" ng-src="{{fromUser.defaultProfImage.imagePath}}{{fromUser.defaultProfImage.imageName}}">
+            </a>
+            <label>{{reply.fromUser.name.firstName}} {{reply.fromUser.name.lastName}}</label>
+          </div>
+          <div class="col-md-1 col-md-offset-1"></div>
+        </div><!-- end of row -->
+      </div><!-- end of ui-view="inbox-main" -->
+    </div>
+  </div>
+</div>

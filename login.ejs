@@ -1,0 +1,35 @@
+<div class="container-fluid" >
+  <div class="row" style='margin-top:75px'>
+    <div class="col-md-6 col-md-offset-3">
+      <div class="ws-brand">Wellshana</div>
+      <form id="loginForm" class="form" name="login" method="post" ng-submit="onLogin()" >
+        <div class="form-group">
+          <label for="userName">Email</label>
+          <input type="text" class="form-control" id="username" ng-model="credentials.email" style="width: 200px">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" ng-model="credentials.password" style="width: 200px">
+        </div>
+        <div ng-show="successMessage" class="alert alert-success" role="alert">
+          <span class="sr-only">Success:</span>
+          {{successMessage}}
+        </div>
+        <div ng-show="errorMessage" class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+          {{errorMessage}}
+        </div>
+        <div class="form-group">
+          <div class="login-help-text"><a ui-sref="reset-password">Forgot password?</a>
+            By logging in, you agree to Wellshana’s Terms of Service and Privacy Policy.
+          </div>
+          <button type="submit" class="btn btn-large btn-primary" name="Submit" value="Log In" >Log In</button>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="login-help-text">New to Wellshana? <a ui-sref="signup.start">Sign up</a></div>
+        </div>
+      </div>
+</div><!-- end of container-fluid-->

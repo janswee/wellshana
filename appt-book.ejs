@@ -1,0 +1,127 @@
+<div class="container-fluid">
+  <div class="row" ng-show="!appointment.user || !appointment.therapist" style='margin-top:75px'>
+    <div class="col-md-8 col-md-offset-2">
+      <div class="jumbotron">
+        <h3>Please start over.</h3>
+        <br>
+    		<h5>Any changes you may have made have been lost...</h5>
+      	<ul>
+    			<li>There may have been too much time between entries</li>
+    			<li>You may have opened more than one browser</li>
+    			<li>There may be an expired bookmark</li>
+    			<li>The back button may have caused a problem</li>
+    		</ul>
+    		<button type="submit" class="btn btn-large btn-primary" name='Home' value="Home" ui-sref="main.home">Home</button>
+      </div><!--end of jumbotron-->
+      <br><br>
+    </div><!-- end of col -->
+  </div><!-- end of row -->
+  <div class="row" ng-show="appointment.user || appontment.therapist">
+    <div class="col-md-11 col-md-offset-1">
+      <div class="row">
+        <div class="col-sm-7">
+          <h3>Appointment Details</h3>
+          <!--<div>Appt is {{appointment}}</div>-->
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td colspan=3>{{therapist.user.name.firstName}} {{therapist.user.name.lastName}}, PCCI {{therapist.qualifications.license.licenseNo}}</td>
+              </tr>
+              <tr>
+                <td>Online</td>
+                <td><strong>{{appointment.startDateTime | date: 'MMMM, dd yyyy'}}</strong>  at <strong>{{appointment.startDateTime | date: 'hh:mma'}}</strong></td>
+                <td>Duration: {{appointment.duration}} minutes</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>Payment</h3>
+          <form name="bookAppointmentForm" class="form-inline" novalidate>
+            <div class="form-group" ng-class="{ 'has-error' : bookAppointmentForm.paymentType.$invalid && bookAppointmentForm.paymentType.$pristine}" >
+              <label for="paymentType" class="control-label">Payment Type</label>
+              <br>
+              <select name="paymentType" class="form-control input-sm" ng-change="selectPaymentInfo(creditCardNumberIndex)" ng-model="creditCardNumberIndex" style="width: 200px" ng-pattern="/^\d+$/">
+                <option value="Credit Card" disabled>Credit Card</option>
+                <option ng-selected="paymentInfo.isDefaultPayment" ng-repeat="paymentInfo in user.paymentInfo" value="{{$index}}" >VISA {{paymentInfo.creditCardNumber}}</option>
+                <option value="1000">Add New Card</option>
+                <option value="2000">PayPal</option>
+              </select>
+              <span ng-show="bookAppointmentForm.paymentType.$invalid && bookAppointmentForm.paymentType.$pristine" class="help-block" style="margin: 5px 10px;">Please select a valid payment.</span>
+            </div><!-- end of form group -->
+            <div ng-show="!user.paymentInfo.name" class="form-group"><br>
+              Name: <strong>{{appointment.paymentInfo.name.firstName}} {{appointment.paymentInfo.name.middleInitial}} {{appointment.paymentInfo.name.lastName}}</strong>
+              <br>
+              Exp Date: <strong>{{appointment.paymentInfo.creditCardExpMonth}}/{{appointment.paymentInfo.creditCardExpYear}}</strong>
+            </div><!-- end of form group -->
+            <div ui-view='payment-add'></div><!-- end of ui-view -->
+            <p/>
+            <h3>Your Contact Details</h3>
+            <!--</form>-->
+            <!--<form name="bookAppointmentForm" class="form-inline" novalidate>-->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group" ng-class="{ 'has-error' : (bookAppointmentForm.areacode.$invalid) || (bookAppointmentForm.number.$invalid) }">
+                  <label for="areacode" class="control-label">Phone: </label>
+                  <span ng-show="appointment.phone">({{appointment.phone.areacode}}) {{appointment.phone.number}}</span>
+                  <input ng-show="!appointment.phone.areacode" type="text" class="form-control input-sm" name="areacode" ng-model="user.phone.areacode" style="width: 50px" required>
+                  <input ng-show="!appointment.phone.number" type="text" class="form-control input-sm" name="number" ng-model="user.phone.number" style="width: 150px" required>
+                  <span ng-show="bookAppointmentForm.areacode.$invalid" class="help-block" style="margin: 5px 10px;">Your area code is required.</span>
+                  <span ng-show="bookAppointmentForm.number.$invalid" class="help-block" style="margin: 5px 10px;">Your phone number is required.</span>
+                </div><!-- end of form group -->
+              </div><!--end of col-->
+            </div><!--end of row-->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group" ng-class="{ 'has-error' : (bookAppointmentForm.email.$invalid) }">
+                  <label for="email" class="control-label">Email: </label>
+                  <span ng-show="appointment.email">{{appointment.email}}</span>
+                  <input ng-show="!appointment.email" type="text" class="form-control input-sm" name="email" ng-model="user.email" style="width: 150px" required>
+                  <span ng-show="bookAppointmentForm.email.$invalid" class="help-block" style="margin: 5px 10px;">Your email is required.</span>
+                </div><!-- end of form group -->
+              </div><!--end of col-->
+            </div><!--end of row-->
+            <h3>Preparing for your Therapy Appointment</h3>
+            <ul>
+              <li>Make sure you have connectivity.</li>
+              <li>Login 5 minutes before your start time.</li>
+              <li>During your therapy session appointment, you must be in the state where your therapist practices.</li>
+            </ul>
+            <p/>
+            <button type="submit" class="btn btn-large btn-primary" name='Submit' value="Book" ng-click="onBook()" ng-disabled="bookAppointmentForm.$invalid">Book Appointment</button>
+          </form>
+        </div><!--col-sm-7-->
+        <div class="col-sm-4 col-sm-offset-1 profile-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+              <img ng-src="{{myProfImage.imagePath}}{{myProfImage.imageName}}" style=" width:200px;">
+          </div>
+          <div class="sidebar-module">
+            <h4>Appointment Details</h4>
+            <td><strong>{{appointment.startDateTime | date: 'MMMM, dd yyyy'}}</strong>  at <strong>{{appointment.startDateTime | date: 'hh:mma'}}</strong></td>
+            <div>Duration: {{appointment.duration}} minutes</div>
+            <div>Online</div>
+            <table class="table table-condensed borderless">
+              <tbody>
+                <tr>
+                  <td>Cancellation Policy</td>
+                  <td><strong>24 hour notice</strong></td>
+                </tr>
+                <p/>
+                <tr>
+                  <td>Session Fee</td>
+                  <td><strong>$80</strong></td>
+                </tr>
+                <tr>
+                  <td>Service Fee</td>
+                  <td><strong>$2</strong></td>
+                </tr>
+                <tr>
+                  <td><h4>Total</h4></td>
+                  <td><strong><h4>$82</h4></strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div><!-- end of col-sm-4 -->
+      </div><!--end of row-->
+    </div><!--/span-->
+  </div><!--/row-->
+</div>

@@ -1,0 +1,357 @@
+
+<link href="stylesheets/session.css" rel="stylesheet" type="text/css">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-11 col-md-offset-1">
+            <div class="row">
+              <div class="col-sm-6">
+                <br>
+                <div class="profile-section">
+                  <div class="profile-main">
+                    <div class="localVideo largeVideo" id="local">
+                      <video ng-src="{{myProfVideo.videoPath}}{{myProfVideo.videoName}}" controls></video>
+                    </div>
+                    <label ng-show="isMyProfile">
+                      Record a Video
+                    </label>
+                    <br>
+                    <button id="toggleVideo" type="submit" ng-class="videoClass" ng-click="toggleLocalVideo()"></button>
+                    <button id="toggleRecord" type="submit" ng-class="recordClass" ng-click="toggleRecord()" disabled></button>
+                    <button id="pauseRes" ng-click="onPauseResumeClicked()" disabled>Pause</button>
+                    <button id="playback" ng-click="playRecordedVideo()" disabled>Play</button>
+                  </div>
+                  <a id="downloadLink" download="mediarecorder.webm" name="mediarecorder.webm" href></a>
+                  <form ng-show="videoAvailableToUpload" class="form-inline" name="videoUpload" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <input type="text" class="form-control input-sm" style="width: 200px" readonly ng-model="videoFileName">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm" ng-click="onMediaUpload(recordedVideo, 'video')" ui-sref="profile">Upload Video</button>
+                  </form>
+                <span class="profile-main">
+                  <div ui-view="profile.about">
+                    <div ng-show="isMyProfile" class="row"><div class="col-md-12"><a class="btn btn-sm btn-primary align-right" ui-sref="profile.about({id: '{{user_id}}' })">Edit</a></div></div>
+                    <p ng-bind-html="about"/>
+                    <label ng-show="!about && isMyProfile">
+                      About Section
+                    </label>
+                    <div class="panel panel-default" ng-show="!about && isMyProfile">
+                      <div class="panel-body">
+                        Please describe yourself.
+                      </div>
+                    </div>
+                  </div><!-- end of ui-view -->
+                  <p>This section post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
+                  <hr>
+                  <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
+                  <blockquote>
+                    <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                  </blockquote>
+                  <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                  <h2>Heading</h2>
+                  <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                  <h3>Sub-heading</h3>
+                  <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                  <pre><code>Example code block</code></pre>
+                  <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+                  <h3>Sub-heading</h3>
+                  <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                  <ul>
+                    <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
+                    <li>Donec id elit non mi porta gravida at eget metus.</li>
+                    <li>Nulla vitae elit libero, a pharetra augue.</li>
+                  </ul>
+                  <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
+                  <ol>
+                    <li>Vestibulum id ligula porta felis euismod semper.</li>
+                    <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
+                    <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
+                  </ol>
+                  <p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>
+                </div><!-- /.profile-section -->
+
+                <div class="profile-section">
+                  <h2 class="profile-section-title">Another section post</h2>
+                  <p class="profile-section-meta">December 23, 2013 by <a href="#">Jacob</a></p>
+
+                  <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
+                  <blockquote>
+                    <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                  </blockquote>
+                  <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                  <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                </div><!-- /.profile-section -->
+
+                <div class="profile-section">
+                  <h2 class="profile-section-title">New feature</h2>
+                  <p class="profile-section-meta">December 14, 2013 by <a href="#">Chris</a></p>
+
+                  <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                  <ul>
+                    <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
+                    <li>Donec id elit non mi porta gravida at eget metus.</li>
+                    <li>Nulla vitae elit libero, a pharetra augue.</li>
+                  </ul>
+                  <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                  <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
+                </div><!-- /.profile-section -->
+                  <nav>
+                    <ul class="pager">
+                      <li><a href="#">Previous</a></li>
+                      <li><a href="#">Next</a></li>
+                    </ul>
+                  </nav>
+                </span><!-- /.profile-main -->
+              </div><!--col-sm-6-->
+              <div class="col-sm-5 col-sm-offset-1 profile-sidebar">
+                <div class="sidebar-module sidebar-module-inset">
+
+                      <div class="profile-section-header">{{user.name.firstName}} {{user.name.lastName}}</div>
+                      <div class="profile-section-subheader">{{user.therapist.professionalTitle}}</div>
+                      <div class="profile-section-subheader"> PCCI {{user.therapist.qualifications.license.licenseNo}}</div>
+                      <div class="profile-section-company">{{user.therapist.companyName}}</div>
+                      <p class ="profile-section-address">{{user.address.streetNumber}} {{user.address.streetName1}}, {{user.address.streetName2}} {{user.address.city}}, {{user.address.state}}  {{user.address.zip}}</p>
+                  <div>
+                      <div class="profile-carousel">
+                        <uib-carousel template-url="views/templates/carousel-images.html" interval="myInterval" no-wrap="noWrapSlides">
+                            <uib-slide ng-repeat="image in user.images" active="image.active">
+                              <div class="dropdown">
+                                <span class="glyphicon glyphicon-pencil dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                </span>
+                                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                                  <li><a href ng-click="deleteMedia(image._id)">Delete Image</a></li>
+                                  <li><a href ng-click="setDefaultImage(image._id)">Make Default Image</a></li>
+                                </ul>
+                              </div>
+                              <img ng-src="{{image.imagePath}}{{image.imageName}}" style="margin:auto;">
+                              <div class="carousel-caption">
+                                <h4>Slide {{$index}}</h4>
+                              </div>
+                            </uib-slide>
+                        </uib-carousel>
+                      </div><!--end of profile image carousel -->
+                      <!-- custom directive for fileUpload -->
+                      <form class="form-inline" name="imageUpload" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                          <label for="photo_upload" class="control-label">Upload a photo</label>
+                          <br>
+                          <label class="btn btn-primary btn-sm">
+                            Browse <input type="file" accept="image/*" style="display: none;" name="profImage" id="profImage" file-model="myProfImage" file-name="fileName">
+                          </label>
+                          <input type="text" class="form-control input-sm" style="width: 200px" readonly ng-model="fileName">
+                          <div class="hint">Supported files: jpg, jpeg, png.</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm" ng-click="onMediaUpload(myProfImage, 'image')" ui-sref="profile">Upload</button>
+                      </form>
+                      <p></p>
+                      <div class="form-group" ng-hide="isMyProfile">
+                        <a class="btn btn-primary" ui-sref="session">Activate Session</a>
+                        <a class="btn btn-primary" ui-sref="compose-message({ toUser: user._id })">Send a Message</a>
+                      </div>
+                  </div>
+                </div> <!-- end of sidebar-modele -->
+                <div class="sidebar-module">
+                  <h4>Qualifications</h4>
+                  <div ui-view="profile.qualifications">
+                    <!-- show edit buttons only if in edit mode using ng-show -->
+                    <div ng-show="isMyProfile" class="row"><div class="col-md-12"><a class="btn btn-sm btn-primary align-right" ui-sref="profile.qualifications({id: '{{user_id}}' })">Edit</a></div></div>
+                    <div ng-repeat="school in schools">
+                        <div>{{school.degreeType}} in {{school.degreeName}}</div>
+                        <div>{{school.schoolName}} </div>
+                        <hr>
+                    </div>
+                    <div ng-repeat="association in user.therapist.qualifications.associations">
+                        <div>{{association.position}} of {{association.name}}</div>
+                        <hr>
+                    </div>
+                    <br>
+                    <div class="panel panel-default" ng-show="schools.length === 0 && associations.length === 0 && isMyProfile">
+                      <div class="panel-body">
+                        Please add your qualifications.
+                      </div>
+                    </div>
+                  </div><!-- profile.qualifications-->
+                </div>
+                <div class="sidebar-module">
+                  <h4>Treatment Issues</h4>
+                  <div ui-view="profile.issues">
+                    <!-- show edit buttons only if in edit mode using ng-show -->
+                    <div ng-show="isMyProfile" class="row"><div class="col-md-12"><a class="btn btn-sm btn-primary align-right" ui-sref="profile.issues({id: '{{user_id}}' })">Edit</a></div></div>
+                    <div class="nav-header" ng-show="therapist.profilePage.issues.length > 0"><strong>Issues</strong></div>
+                    <li ng-repeat="item in therapist.profilePage.issues | limitTo: limit track by $index" ng-show="item !==null">
+                      {{item}}
+                    </li>
+                    <br>
+                    <div class="nav-header" ng-show="therapist.profilePage.gender.length > 0"><strong>Gender</strong></div>
+                    <li ng-repeat="item in therapist.profilePage.gender | limitTo: limit track by $index" ng-show="item !==null">
+                      {{item}}
+                    </li>
+                    <br>
+                    <div class="nav-header" ng-show="therapist.profilePage.sexuality.length > 0"><strong>Sexuality</strong></div>
+                    <li ng-repeat="item in therapist.profilePage.sexuality | limitTo: limit track by $index" ng-show="item !==null">
+                      {{item}}
+                    </li>
+                    <br>
+                    <div class="nav-header" ng-show="therapist.profilePage.age.length > 0"><strong>Age</strong></div>
+                    <li ng-repeat="item in therapist.profilePage.age | limitTo: limit track by $index" ng-show="item !==null">
+                      {{item}}
+                    </li>
+                    <br>
+                    <div class="nav-header" ng-show="therapist.profilePage.treatmentStyle.length > 0"><strong>Treatment Style</strong></div>
+                    <li ng-repeat="item in therapist.profilePage.treatmentStyle | limitTo: limit track by $index" ng-show="item !==null">
+                      {{item}}
+                    </li>
+                    <br>
+                    <div class="panel panel-default" ng-show="therapist.profilePage.issues.length === 0 && isMyProfile">
+                      <div class="panel-body">
+                        Please add the issues you treat or specialize in.
+                      </div>
+                    </div>
+                  </div><!-- profile.qualifications-->
+                  <ol class="list-unstyled">
+                    <li><a href="#">March 2014</a></li>
+                    <li><a href="#">February 2014</a></li>
+                    <li><a href="#">January 2014</a></li>
+                    <li><a href="#">December 2013</a></li>
+                    <li><a href="#">November 2013</a></li>
+                    <li><a href="#">October 2013</a></li>
+                    <li><a href="#">September 2013</a></li>
+                    <li><a href="#">August 2013</a></li>
+                    <li><a href="#">July 2013</a></li>
+                    <li><a href="#">June 2013</a></li>
+                    <li><a href="#">May 2013</a></li>
+                    <li><a href="#">April 2013</a></li>
+                  </ol>
+                </div>
+                <div class="sidebar-module">
+                  <h4>Elsewhere</h4>
+                  <ol class="list-unstyled">
+                    <li><a href="#">GitHub</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                  </ol>
+                </div>
+              </div><!-- /.profile-sidebar -->
+            </div><!--end of row-->
+
+            <div class="row">
+                <div class="col-md-8">
+                  <div class="row">
+                    <span class="profile">
+                            <div><h4 id="profile-name">{{user.name.firstName}} {{user.name.lastName}}</h4></div>
+                            <div><h5 class="navy">{{user.therapist.professionalTitle}}</h5></div>
+                            <div><h5 class="navy">PCCI {{user.therapist.qualifications.license.licenseNo}}</h5></div>
+                    </span>
+                  </div><!--row-->
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="accordion-group" id="bio-accordian">
+                              <span class="accordion-heading">
+                                  <h3>Bios (<a class="accordian-toggle" id="bio-collapse" data-toggle="collapse" data-parent="#bio-accordian" data-target="#bio-summary"><span class="glyphicon glyphicon-minus-sign"></span></a><span class="collapse-expand-text"> Collapse)</span></h3>
+                              </span>
+                          </div>
+                          <div id="bio-summary" class="accordion-body collapse in">
+                              <p><h4 class="blue">Summary</h4></p>
+                              <p>Dedicated non-profit professional possessing a record of performance in leading efforts to identify, solicit, and secure individual, major and corporate gifts through development and cultivation of key relationships supporting organizational mission and vision.</p>
+                              <p><h4 class="blue">Specialities</h4></p>
+                              <p>Fund Generation & Process Implementation, Program Facilitation, Project Management, Strategic Marketing, Event Execution, Revenue Generation, Donor Relations, Volunteer Management, and Compliance to drive key goals.</p>
+                          </div>
+                       </div>
+                  </div> <!--end bio accordian-->
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="accordion-group" id="charities-accordian">
+                              <span class="accordion-heading">
+                                  <h3>Currently Following (
+                                      <a class="accordian-toggle" id="charities-collapse" data-toggle="collapse" data-parent="#charities-accordian" data-target="#charities-list"><span class="glyphicon glyphicon-minus-sign"></span></a>
+                                      <span class="collapse-expand-text"> Collapse)</span>
+                                  </h3>
+                              </span>
+                          </div>
+                          <div id="charities-list" class="accordion-body collapse in">
+                              <p><h4 class="blue">Charities (3)</h4></p>
+                              <div class="row row-separator">
+                                  <div class="col-md-9">
+                                      <div><a href="charity.html?name=doefund" class="charity">The Doe Fund</a> (Poverty; Education)
+                                      </div>
+                                      <div>
+                                          <strong>Why I Care:</strong> Helps to provide rehabilitation, employment, and hope to thousands of minority men in the NYC and Philly.
+                                      </div>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <a class="charity-logo-container" href="charity.html?name=doefund">
+                                          <img src="images/DoeFund.jpg">
+                                      </a>
+                                  </div>
+                              </div>
+                              <hr>
+                              <div class="row">
+                                  <div class="col-md-9">
+                                      <div><a href="charity.html?name=donorschoose" class="charity">DonorsChoose.org</a> (Education)
+                                      </div>
+                                      <div>
+                                          <strong>Why I Care:</strong> Helps teachers fund school projects in impoverished neighborhoods and allows those kids to get better access to educational tools.
+                                      </div>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <a class="charity-logo-container" href="charity.html?name=donorschoose">
+                                          <img src="images/DonorsChoose.jpg">
+                                      </a>
+                                  </div>
+                              </div>
+                              <hr>
+                              <div class="row">
+                                  <div class="col-md-9">
+                                      <div><a href="charity.html?name=redcross" class="charity">American Red Cross</a> (Human Services)
+                                      </div>
+                                      <div>
+                                          <strong>Why I Care:</strong> Provides large scale humanitarian services in response to disasters.
+                                      </div>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <a class="charity-logo-container" href="charity.html?name=redcross">
+                                          <img class="thumbnail" src="images/RedCross.jpg">
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                       </div>
+                  </div><!--row--> <!--end charities accordian-->
+                </div><!--end of column-->
+            </div><!-- end of row -->
+            <br>
+            <div class="row-fluid">
+              <div class="col-md-12">
+                <!--<div id='calendar'></div>-->
+              </div>
+            </div>
+        </div><!--/span-->
+    </div><!--/row-->
+</div>
+<pre>
+  <!-- Here's some values to keep an eye on in the sample in order to understand $state and $stateParams -->
+  $state = {{$state.current.name}}
+  $stateParams = {{$stateParams}}
+  $state full url = {{ $state.$current.url.source }}
+  <!-- $state.$current is not a public api, we are using it to
+       display the full url for learning purposes-->
+</pre>
+
+<script type="text/javascript">
+   $(document).ready(function() {
+
+      $('.accordian-toggle').on("click", function(e) {
+              varClass = $(this).find('span').toggleClass('glyphicon-minus-sign glyphicon-plus-sign').attr('class');
+
+              collapseExpandText = $(this).parent().find('.collapse-expand-text'); //parent is 'h3' with 2 children 'a' and 'span'
+
+              if (collapseExpandText.html() == "<span class=\"collapse-expand-text\"> Expand)</span>") {
+                  collapseExpandText.html("<span class=\"collapse-expand-text\"> Collapse)</span>");
+              } else {
+                  collapseExpandText.html("<span class=\"collapse-expand-text\"> Expand)</span>");
+              }
+
+      });
+    });
+
+
+</script>

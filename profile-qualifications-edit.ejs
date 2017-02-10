@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-body">
+      <label >
+        Qualifications Section
+      </label>
+      <form id="editQualificationsForm" name="editQualificationsForm" method="post">
+        <div data-ng-repeat="association in associations">
+          <div class="form-group">
+            <label for="associationName">
+              Organization
+            </label>
+            <input class="form-control input-sm" ng-model="association.name" name="associationlName" value="" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="assocPosition">
+              Position/Title
+            </label>
+            <select class="form-control input-sm" ng-model="association.position" ng-init="None" name="assocPosition">
+              <option value="None">----------</option>
+              <option value="Member">Member</option>
+              <option value="Officer">Officer</option>
+              <option value="Vice President">Vice President</option>
+              <option value="President">President</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-sm glyphicon glyphicon-trash" ng-click="removeAssociation($index)">
+          </div>
+        </div><!-- end of ng-repeat associations -->
+        <div class="form-group">
+          <button class="btn btn-primary btn-sm" ng-click="addNewAssociation()">Add Association</button>
+        </div>
+        <div data-ng-repeat="school in schools">
+          <div class="form-group">
+            <label for="schoolName">
+              School
+            </label>
+            <input class="form-control input-sm" ng-model="school.schoolName" name="schoolName" value="" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="degreeType">
+              Degree Name
+            </label>
+            <select class="form-control input-sm" ng-model="school.degreeType" ng-init="None" name="degreeType">
+              <option value="None">----------</option>
+              <option value="High School">High School</option>
+              <option value="Associate's Degree">Associate's Degree</option>
+              <option value="Bachelor's Degree">Bachelor's Degree</option>
+              <option value="Master's Degree">Master's Degree</option>
+              <option value="Doctor of Philosophy (Ph.D.)">Doctor of Philosophy (Ph.D.)</option>
+              <option value="Doctor of Medicine (M.D.)">Doctor of Medicine (M.D.)</option>
+              <option value="Master of Business Administration (M.B.A.)">Master of Business Administration (M.B.A.)</option>
+              <option value="Juris Doctor (J.D.)">Juris Doctor (J.D.)</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="degreelName">
+              Field of Study
+            </label>
+            <input class="form-control input-sm" ng-model="school.degreeName" name="degreeName" value="" placeholder="">
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-sm glyphicon glyphicon-trash" ng-click="removeSchool($index)">
+          </div>
+        </div><!-- end of ng-repeat schools -->
+        <div class="form-group">
+          <button class="btn btn-primary btn-sm" ng-click="addNewSchool()">Add Education</button>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-sm btn-primary" name="Cancel" value="Cancel" ui-sref='profile'
+            title="Cancel Profile Edits">Cancel</button>
+          <button type="submit" class="btn btn-sm btn-primary" name="Submit" value="Submit" ng-click="onFormSubmit()"
+            title="Submit Profile Edits">Submit</button>
+        </div>
+      </form>
+
+    </div>
+
+  </div><!--end of column -->
+</div><!--end of row-->

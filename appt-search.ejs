@@ -1,0 +1,102 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3"> <!-- left nav bar -->
+        <div class="well sidebar-nav">
+          <ul class="nav-search nav-list">
+            <div checkbox-filter-list list="issuesList" limit=10 title="Issues"></div>
+            <li class="nav-header"><strong>Gender</strong></li>
+            <li class="active" ng-repeat="genderItem in genderList"><a href="#">{{genderItem}}</a></li>
+            <br>
+            <li class="nav-header"><strong>Sexuality</strong></li>
+            <li class="active" ng-repeat="sexualityItem in sexualityList"><a href="#">{{sexualityItem}}</a></li>
+            <br>
+            <li class="nav-header"><strong>Age</strong></li>
+            <li class="active" ng-repeat="ageItem in ageList"><a href="#">{{ageItem}}</a></li>
+            <br>
+            <div checkbox-filter-list list="treatmentStyleList" limit=10 title="Treatment Style"></div>
+         </ul>
+       </div><!--/.well -->
+     </div><!-- col -->
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-12">
+                  <h1>Book An Appointment</h1>
+                  <div>ApptModel is {{apptModel}}
+                </div><!--/end of column-->
+            </div><!--/end of row-->
+            <form class="form-inline">
+            <div class="row">
+              <div class="form-group">
+                <label for="name" class="control-label">Name</label>
+                <br>
+                <input type="text" class="form-control input-sm" id="name" placeholder="Name" ng-model="apptModel.name" style="width: 200px">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="city" class="control-label">City</label>
+                <br>
+                <input type="text" class="form-control input-sm" id="city" ng-model="apptModel.city" placeholder="City" style="width: 200px">
+              </div>
+              <div class="form-group">
+                <label for="state" class="control-label">State</label>
+                <br>
+                <select class="form-control input-sm" id="state" ng-model="apptModel.state" style="width: 200px">
+                  <option selected="selected" value="0">State (optional)</option>
+                  <option disabled="disabled" value="-1">-----------------</option>
+                  <option ng-repeat="stateOption in stateOptions" value="{{stateOption.value}}">{{stateOption.text}}</option>
+                </select>
+              </div>
+              <div class="form-group"> or </div>
+              <div class="form-group">
+                <label for="zip" class="control-label">Zip</label>
+                <br>
+                <input type="text" class="form-control input-sm" id="zip" placeholder="Zip" ng-model="apptModel.zip">
+              </div>
+          </div><!--/end of row-->
+          <div class="row">
+              <div class="form-group">
+                <label for="therapistType" class="control-label">Select Therapist Type</label>
+                <br>
+                <select class="form-control input-sm" id="therapistType" ng-model="apptModel.therapistType" style="width: 200px">
+                  <option value="0">-- Select One --</option>
+                  <option value="13">Art Therapist</option>
+                  <option value="3" selected>Clinical Social Work/Therapist</option>
+                  <option value="6">Counselor</option>
+                  <option value="5">Drug & Alcohol Counselor</option>
+                  <option value="11">Licensed Psychoanalyst</option>
+                  <option value="14">Limited Licensed Psychologist</option>
+                  <option value="19">LPC Intern</option>
+                  <option value="4">Marriage & Family Therapist</option>
+                  <option value="16">Marriage & Family Therapist Intern</option>
+                  <option value="9">Occupational Therapist</option>
+                  <option value="10">Other</option>
+                  <option value="12">Pastoral Counselor</option>
+                  <option value="7">Pre-Licensed Professional</option>
+                  <option value="8">Psychiatric Nurse</option>
+                  <option value="1">Psychiatrist</option>
+                  <option value="15">Psychological Associate</option>
+                  <option value="2">Psychologist</option>
+                  <option value="17">Treatment Facility</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="date" class="control-label">Date/Time</label>
+                <br>
+                <input type="text" class="form-control input-sm" id="date" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="apptModel.desiredDate" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                <select class="form-control input-sm" id="time" ng-model="apptModel.desiredTime" style="width: 200px">
+                  <option ng-repeat="timeInputOption in timeInputOptions" value="{{timeInputOption.value}}">{{timeInputOption.text}}</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-large btn-primary glyphicon glyphicon-search form-control" name='Submit' value="Search" ng-click="onSearch(apptModel.desiredDate, apptModel.desiredTime, null, 'appt.search.results', { isApptSearch: true })" >
+            </div><!--/end of row-->
+            </form>
+                <div>
+                  <br/>
+                  <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear Form</button>
+                </div>
+                <div ui-view='appt.search.results'/>
+        </div><!--/span-->
+    </div><!--/row-->
+</div>

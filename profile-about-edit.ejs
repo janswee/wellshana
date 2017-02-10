@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div>{{therapist}}</div>
+    <form id="editProfileForm" name="form" method="post" ng-submit="onFormSubmit()">
+      <div class="form-group">
+        <label for="profileAbout">
+          About
+        </label>
+        <textarea class="form-control" rows="10" ng-model="therapist.profilePage.about" name="profileAbout" value="" placeholder="Please describe yourself"  required></textarea>
+      </div>
+      <button type="submit" class="btn btn-sm btn-primary" name="Cancel" value="Cancel"  ui-sref='profile'>Cancel</button>
+      <button type="submit" class="btn btn-sm btn-primary" name="Submit" value="Submit" ng-click="onFormSubmit()">Submit</button>
+    </form>
+  </div><!--end of col-md-12-->
+</row>
